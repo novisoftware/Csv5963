@@ -18,6 +18,10 @@ ArrayList<ArrayList<String>> a = csv.getData();
 ```
 java com.github.novisoftware.app.Csv5963
 ```
+or
+```
+java -jar csv5963.jar
+```
 
 以下、日本語です。
 
@@ -26,10 +30,23 @@ java com.github.novisoftware.app.Csv5963
 CSVファイルを解析する処理です。
 あと、サンプル的な GUI アプリケーションを作成しています。
 
-## 使い方
+## 使い方(プログラムからの呼び出し方法)
+
+Sample:
+```
+Csv csv = new Csv("UTF-8", Csv.AnalyzePreference.STRICT_ANALYZE);
+csv.read(filename);
+ArrayList<ArrayList<String>> a = csv.getData();
+```
+
+## 使い方(サンプルプログラム)
 
 ```
 java com.github.novisoftware.app.Csv5963
+```
+または
+```
+java -jar csv5963.jar
 ```
 
 ## 処理の説明
