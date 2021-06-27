@@ -75,15 +75,15 @@ BNFを踏まえて、CSVを受理する有限オートマトンを考えます�
 
 ![図1: CSVを受理する有限オートマトン](/doc/image/state.png) 
 
-やってきた入力に沿って状態変数が書き換わるような単純なプログラム( /src/com/github/novisoftware/csv/Csv.java )を書けばいいです。
+あとは、やってきた入力に沿って状態変数が書き換わるような単純なプログラム( https://github.com/novisoftware/Csv5963/blob/main/src/com/github/novisoftware/csv/Csv.java )を書けばいいです。
 
-### 読み取り方法
+### いい加減なファイルも読み取る
 
 CSVファイルというのは、極端には「カンマで区切られていれば、なんでも」該当してしまう・名乗れてしまうし、 RFC4180 に準拠するとは限らないので、
 世の中には、様々なCSVファイルがあるようで、なんか少し変なCSVファイルもあり、多少はいい加減なものも読み取るよう、
 エラーとなる場所で適当に動作するように動作を切り替えることができるようにしています( Csv.analyzePreference )。
 
-クラス Csv (com.github.novisoftware.csv) のコンストラクタの第二引数か、 setAnalyzePreference() で切り替えます。
+クラス Csv (com.github.novisoftware.csv) のコンストラクタの第二引数で指定するか、 setAnalyzePreference() で切り替えます。
 
 ## GUI の アプリケーションについて
 
