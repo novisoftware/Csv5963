@@ -138,6 +138,9 @@ class MenuBar5963 extends JMenuBar {
 	JMenu     csvReadPreference;
 	JMenu     convert;
 	JMenu     saveWithEncode;
+	JMenu     info;
+	JMenuItem columnSummary;
+	JMenuItem columnCorrelation;
 	JMenu     helpMenu;
 	JMenuItem about;
 
@@ -304,6 +307,21 @@ class MenuBar5963 extends JMenuBar {
 		this.saveWithEncode = new JMenu("Change Encode (with Save)");
 		this.convert.add(saveWithEncode);
 
+		// 情報表示
+		this.info = new JMenu("Info");
+		this.columnSummary = new JMenuItem("Column Summary");
+		this.columnSummary.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				parent.showColumnSummary();
+			}
+		});
+		this.columnCorrelation = new JMenuItem("Column Correlation");
+		this.columnCorrelation.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				parent.showColumnCorrelation();
+			}
+		});
+
 		// Help
 		this.helpMenu = new JMenu("Help");
 		this.about = new JMenuItem("About");
@@ -330,6 +348,10 @@ class MenuBar5963 extends JMenuBar {
 		this.setting.add(csvReadPreference);
 
 		this.add(convert);
+
+		this.add(info);
+		this.info.add(columnSummary);
+		this.info.add(columnCorrelation);
 
 		this.add(helpMenu);
 		this.helpMenu.add(about);
@@ -536,6 +558,7 @@ public class Csv5963 extends JFrame {
 			this.menuPanel.updateSaveEncodeMenu(csvPanel.csv.getEncode());
 
 			this.menuPanel.convert.setEnabled(true);
+			this.menuPanel.info.setEnabled(true);
 		}
 		else {
 			this.menuPanel.reloadWithEncode.setEnabled(false);
@@ -543,6 +566,7 @@ public class Csv5963 extends JFrame {
 			this.menuPanel.saveAs.setEnabled(false);
 			this.menuPanel.close.setEnabled(false);
 			this.menuPanel.convert.setEnabled(false);
+			this.menuPanel.info.setEnabled(false);
 		}
 	}
 
@@ -740,6 +764,26 @@ public class Csv5963 extends JFrame {
 		}
 
 		return null;
+	}
+
+	/**
+	 * 列数、値の種類、カーディナリティを表示します。
+	 */
+	void showColumnSummary() {
+		CsvPanel csvPanel = this.getCsvPanel();
+		if (csvPanel != null) {
+			new CsvInfo(csvPanel.getPath(), csvPanel.csv.getModel()).showSummary(this);
+		}
+	}
+
+	/**
+	 * 列と列の対応関係を表示します。
+	 */
+	void showColumnCorrelation() {
+		CsvPanel csvPanel = this.getCsvPanel();
+		if (csvPanel != null) {
+			new CsvInfo(csvPanel.getPath(), csvPanel.csv.getModel()).showCorrelation(this);
+		}
 	}
 
 	/**
